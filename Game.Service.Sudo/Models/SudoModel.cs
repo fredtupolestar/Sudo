@@ -25,7 +25,7 @@ public partial class SudoModel
         LinkSudoNodeCollections();
     }
 
-    //
+
     public bool SetValue(int rowIdx, int colIdx, int targetValue)
     {
         var node = _sudoNodes[rowIdx,colIdx];
@@ -38,17 +38,19 @@ public partial class SudoModel
         return _sudoNodes[rowIdx,colIdx];
     }
 
-    public SudoNode? NextEmpty()
+    public SudoNode? NextEmpty(bool isUseSuggest)
     {
-        // for (int row = 0; row < 9; row++)
-        // {
-        //     for (int col = 0; col < 9; col++)
-        //     {
-        //         var firstColumnNode = this._sudoNodes[row, col];
-        //         FilterSuggest(firstColumnNode);
-        //     }
-        // }
-
+        if (isUseSuggest)
+        {
+            for (int row = 0; row < 9; row++)
+            {
+                for (int col = 0; col < 9; col++)
+                {
+                    var firstColumnNode = this._sudoNodes[row, col];
+                    FilterSuggest(firstColumnNode);
+                }
+            }
+        }
         SudoNode? emptyNode = null;
         for (int row = 0; row < 9; row++)
         {
@@ -100,7 +102,6 @@ public partial class SudoModel
         if(node.Suggest.Length == 1){
             var from = node.Value;
             node.Value = node.Suggest.First();
-            Console.WriteLine($"-> Row:{node.RowIdx}, Column:{node.ColumnIdx}, SetValue: {from} => {node.Value}");
         }
     }
 

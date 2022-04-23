@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SudoDemo", "SudoDemo\SudoDe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudo.OCR", "Sudo.OCR\Sudo.OCR.csproj", "{AB1144DA-CFC9-43AF-8DBF-C93889379F1C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game.Service.Sudo", "Game.Service.Sudo\Game.Service.Sudo.csproj", "{108193E6-918E-46BE-9F3E-04249738764B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,5 +42,9 @@ Global
 		{AB1144DA-CFC9-43AF-8DBF-C93889379F1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB1144DA-CFC9-43AF-8DBF-C93889379F1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB1144DA-CFC9-43AF-8DBF-C93889379F1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{108193E6-918E-46BE-9F3E-04249738764B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{108193E6-918E-46BE-9F3E-04249738764B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{108193E6-918E-46BE-9F3E-04249738764B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{108193E6-918E-46BE-9F3E-04249738764B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

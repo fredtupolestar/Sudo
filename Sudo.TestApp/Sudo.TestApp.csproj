@@ -2,6 +2,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Sudo.Core\Sudo.Core.csproj" />
     <ProjectReference Include="..\Sudo.OCR\Sudo.OCR.csproj" />
+    <ProjectReference Include="..\Game.Service.Sudo\Game.Service.Sudo.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

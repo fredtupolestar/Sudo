@@ -25,9 +25,6 @@ public class OCRService
         _current_mat = new Mat();
         src.CopyTo(_src);
         src.CopyTo(_current_mat);
-
-        _src = _src.Resize(new Size(860, 860));
-        _current_mat = _current_mat.Resize(new Size(860, 860));
     }
 
     public int[] DoOCR(KNearest kNearest, out Mat[] splitMats, bool isTrainingMode = false, string? trainingDataSaveTo = null)

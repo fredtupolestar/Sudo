@@ -1,53 +1,20 @@
-﻿using System.Diagnostics;
-using OpenCvSharp;
-using Sudo.Core.Models;
+﻿using System.Reflection.Metadata;
+using Game.Service.Sudo.Common;
 
-var file = @"D:\trainingTest\sudo1.jpg";
-var traningDataFolder = @"D:\training";
+Console.WriteLine("Hi");
 
-Stopwatch stopwatch = new Stopwatch();
-stopwatch.Start();
-Sudo.OCR.OCRService ocr = new Sudo.OCR.OCRService(file);
-Console.WriteLine("Loading training images");
-var images = ocr.ReadTrainingImages(traningDataFolder, "*.jpg");
-Console.WriteLine("Trainint...");
-var kNearest = ocr.TrainData(images);
-var model = @"D:\CSharpGames\Sudo\SudoDemo\KNearestModel\number_ocr";
-if(File.Exists(model))
-    File.Delete(model);
-kNearest.Save(model);
+Game.Service.Sudo.Sudoku sudoku = new Game.Service.Sudo.Sudoku();
+var sudoModel = sudoku.SudoModel;
+Game.Service.Sudo.Resolver resolver = new Game.Service.Sudo.Resolver(sudoModel);
+int deep = 0;
+var isResolved = resolver.Resolve(ref deep);
+Console.WriteLine($"IsResolved:{isResolved} , Resolve count:{resolver.Resolves.Count} , Deep:{deep}");
 
-//var kNearest = OpenCvSharp.ML.KNearest.Load(@"D:\CSharpGames\Sudo\SudoDemo\KNearestModel\number_ocr");
-
-Console.WriteLine("OCR Start...");
-var ocrNumbers = ocr.DoOCR(kNearest,out Mat[] results);
-for (int row = 0; row < 9; row++)
+foreach (var item in resolver.Resolves)
 {
-    for (int col = 0; col < 9; col++)
-    {
-        Console.Write(ocrNumbers[(row * 9) + col]);
-    }
-    Console.WriteLine();
-}
-
-Console.WriteLine("Try to resolve sudo.");
-Sudo.Core.Sudoku sudoku = new Sudo.Core.Sudoku(ocrNumbers);
-var isResolved = sudoku.TryResolve(out SudoNode[,] result, ocrNumbers);
-stopwatch.Stop();
-if(isResolved)
-{
-    Console.WriteLine("Resolved:");
+    Console.WriteLine("-----Resolve---->");
     for (int row = 0; row < 9; row++)
     {
-        for (int col = 0; col < 9; col++)
-        {
-            Console.Write(result[row,col].Value);
-        }
-        Console.WriteLine();
+        Console.WriteLine(string.Join(",", item.SliceRow(row).Select(a=>a.Value)));
     }
 }
-else
-{
-    Console.WriteLine("无解");
-}
-Console.WriteLine($"Cost: {stopwatch.ElapsedMilliseconds} ms");

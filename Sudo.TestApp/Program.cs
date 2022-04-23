@@ -1,15 +1,18 @@
-﻿using System.Reflection.Metadata;
+﻿using System.Diagnostics;
+using System.Reflection.Metadata;
 using Game.Service.Sudo.Common;
 
 Console.WriteLine("Hi");
 
 Game.Service.Sudo.Sudoku sudoku = new Game.Service.Sudo.Sudoku();
 var sudoModel = sudoku.SudoModel;
-Game.Service.Sudo.Resolver resolver = new Game.Service.Sudo.Resolver(sudoModel);
-int deep = 0;
-var isResolved = resolver.Resolve(ref deep);
+Stopwatch stopwatch = new Stopwatch();
+stopwatch.Start();
+Game.Service.Sudo.Resolver resolver = new Game.Service.Sudo.Resolver(sudoModel,true);
+var isResolved = resolver.Resolve(out int deep);
 Console.WriteLine($"IsResolved:{isResolved} , Resolve count:{resolver.Resolves.Count} , Deep:{deep}");
-
+stopwatch.Stop();
+Console.WriteLine($"Cost:{stopwatch.ElapsedMilliseconds}ms");
 foreach (var item in resolver.Resolves)
 {
     Console.WriteLine("-----Resolve---->");
